@@ -1,97 +1,66 @@
-1. package.json
-{
-  "name": "nodejs-docker-app",
-  "version": "1.0.0",
-  "description": "Simple Node.js app in Docker",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2"
-  }
-}
+Node.js Docker App
 
-2. server.js
-const express = require('express');
-const path = require('path');
+A simple Node.js application running in a Docker container.
+This app serves a basic webpage with a CSS file for styling.
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+📂 Project Structure
+.
+├── Dockerfile
+├── package.json
+├── server.js
+└── public
+    └── style.css
 
-// Serve static files (CSS, images, etc.)
-app.use(express.static(path.join(__dirname, 'public')));
+⚡ Features
 
-// Basic route
-app.get('/', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Node.js Docker App</title>
-        <link rel="stylesheet" href="/style.css">
-      </head>
-      <body>
-        <h1>Hello from Node.js in Docker! 🚀</h1>
-        <p>This is a sample app running inside a container.</p>
-      </body>
-    </html>
-  `);
-});
+Minimal Node.js server using Express
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+Serves a static CSS file
 
-3. public/style.css (create a folder public and put this file inside)
-body {
-  font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #f4f4f4;
-  text-align: center;
-  padding: 50px;
-}
+Runs inside a Docker container
 
-h1 {
-  color: #00ffcc;
-}
+Easy to deploy and extend
 
-p {
-  font-size: 18px;
-}
+🛠 Prerequisites
 
-4. Dockerfile
-# Use official Node.js image
-FROM node:18
+Docker
+ installed
 
-# Set working directory
-WORKDIR /app
+Optional: Node.js
+ for local testing
 
-# Copy package.json and install dependencies
-COPY package.json .
-RUN npm install
+🚀 Quick Start
+1. Clone the repository
+git clone <your-repo-url>
+cd <your-repo-folder>
 
-# Copy rest of the app
-COPY . .
-
-# Expose port
-EXPOSE 3000
-
-# Start app
-CMD ["npm", "start"]
-
-How to Run
-
-Build Docker image:
-
+2. Build Docker image
 docker build -t nodejs-docker-app .
 
-
-Run container:
-
+3. Run container
 docker run -d -p 3000:3000 nodejs-docker-app
 
-
-Open in browser:
-
+4. Open in browser
 http://localhost:3000
+
+🎨 Styling
+
+The app uses a basic CSS file located at:
+
+public/style.css
+
+
+You can modify this file to change the appearance of the webpage.
+
+📦 Dockerfile Overview
+FROM node:18
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+
+📝 License
+
+This project is MIT Licensed.
